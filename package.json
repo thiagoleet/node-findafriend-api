@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup src --out-dir build",
+    "start": "node build/server.js",
+    "start:dev": "tsx watch src/server.ts"
   },
   "dependencies": {
     "@rocketseat/eslint-config": "^2.2.2",
