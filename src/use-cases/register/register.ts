@@ -1,3 +1,4 @@
+import { OrgAlreadyExistsError, RequiredFieldsError } from "@/errors";
 import { OrgRepository } from "@/repositories";
 import { Org } from "@prisma/client";
 import { hash } from "bcryptjs";
@@ -20,7 +21,15 @@ export class RegisterUseCase {
   constructor(private repository: OrgRepository) {}
 
   async execute(data: RegisterUseCaseProps): Promise<RegisterUseCaseResponse> {
-    // TODO: Validate email as unique
+    const hasSameEmail = await this.repository.findByEmail(data.email);
+
+    if (hasSameEmail) {
+      throw new OrgAlreadyExistsError();
+    }
+
+    if (!data.address || !data.phone) {
+      throw new RequiredFieldsError();
+    }
 
     const password_hash = await hash(data.password, SALT_ROUNDS);
 
