@@ -76,11 +76,19 @@ describe("Filter Pets UseCase", () => {
     expect(pets).toHaveLength(2);
   });
 
-  it("should be able to filter pets by species/city", async () => {
+  it("should be able to filter pets by species/city #1", async () => {
     const { pets } = await sut.execute({
       params: { city: "Pet Town", species: "Cat" },
     });
 
     expect(pets).toHaveLength(1);
+  });
+
+  it("should be able to filter pets by species/city #2", async () => {
+    const { pets } = await sut.execute({
+      params: { city: "Pet City", species: "Dog" },
+    });
+
+    expect(pets).toHaveLength(2);
   });
 });
