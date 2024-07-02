@@ -17,6 +17,7 @@ model Org {
   id            String   @id @default(uuid())
   name          String
   address       String
+  city          String
   phone         String
   email         String   @unique
   password_hash String
@@ -28,13 +29,13 @@ model Org {
 }
 
 model Pet {
-  id      String @id @default(uuid())
-  name    String
-  species String
-
+  id        String   @id @default(uuid())
+  name      String
+  species   String
   age       Int
   weight    Float
   orgId     String
+  city      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   org       Org      @relation(fields: [orgId], references: [id])
