@@ -8,6 +8,7 @@ type RegisterUseCaseProps = {
   email: string;
   password: string;
   address: string;
+  city: string;
   phone: string;
 };
 
@@ -27,18 +28,15 @@ export class RegisterUseCase {
       throw new OrgAlreadyExistsError();
     }
 
-    if (!data.address || !data.phone) {
+    if (!data.address || !data.city || !data.phone) {
       throw new RequiredFieldsError();
     }
 
     const password_hash = await hash(data.password, SALT_ROUNDS);
 
     const org = await this.repository.create({
-      name: data.name,
-      email: data.email,
+      ...data,
       password_hash,
-      address: data.address,
-      phone: data.phone,
     });
 
     return { org };

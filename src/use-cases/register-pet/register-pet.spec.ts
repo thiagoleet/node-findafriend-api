@@ -20,6 +20,7 @@ describe("Register Pet UseCase", () => {
       species: "Dog",
       weight: 1,
       orgId: "org-id",
+      city: "Pet City",
     });
 
     expect(pet.id).toEqual(expect.any(String));
@@ -33,6 +34,7 @@ describe("Register Pet UseCase", () => {
         weight: 1,
         species: "Dog",
         orgId: "",
+        city: "Pet City",
       })
     ).rejects.toBeInstanceOf(RequiredFieldsError);
   });
@@ -45,6 +47,7 @@ describe("Register Pet UseCase", () => {
         weight: 1,
         species: "Dog",
         orgId: "org-id",
+        city: "Pet City",
       })
     ).rejects.toBeInstanceOf(RequiredFieldsError);
   });

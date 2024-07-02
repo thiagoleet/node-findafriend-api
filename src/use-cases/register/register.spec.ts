@@ -20,6 +20,7 @@ describe("Register UseCase", () => {
       email: "org@example.com",
       password: "password",
       address: "Org Address",
+      city: "Org City",
       phone: "1234567890",
     };
 
@@ -37,6 +38,7 @@ describe("Register UseCase", () => {
       password: "password",
       address: "Org Address",
       phone: "1234567890",
+      city: "Org City",
     };
 
     await sut.execute(data);
@@ -51,6 +53,7 @@ describe("Register UseCase", () => {
       name: "Org Name",
       email: "org@example.com",
       address: "",
+      city: "Org City",
       password: "password",
       phone: "1234567890",
     };
@@ -65,8 +68,24 @@ describe("Register UseCase", () => {
       name: "Org Name",
       email: "org@example.com",
       address: "Org Address",
+      city: "Org City",
       password: "password",
       phone: "",
+    };
+
+    await expect(() => sut.execute(data)).rejects.toBeInstanceOf(
+      RequiredFieldsError
+    );
+  });
+
+  it("should not be able to register without a city", async () => {
+    const data = {
+      name: "Org Name",
+      email: "org@example.com",
+      address: "Org Address",
+      city: "",
+      password: "password",
+      phone: "1234567890",
     };
 
     await expect(() => sut.execute(data)).rejects.toBeInstanceOf(

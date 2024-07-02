@@ -8,6 +8,7 @@ type RegisterPetUseCaseProps = {
   species: string;
   weight: number;
   orgId: string;
+  city: string;
 };
 
 type RegisterPetUseCaseResponse = {
