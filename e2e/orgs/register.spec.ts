@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { app } from "@/app";
 import { registerOrg } from "../utils/orgs";
 
-describe("[E2E] Register", () => {
+describe("[E2E] Org - Register", () => {
   beforeAll(async () => {
     await app.ready();
   });

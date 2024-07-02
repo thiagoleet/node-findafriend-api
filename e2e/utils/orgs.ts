@@ -1,10 +1,10 @@
 import request from "supertest";
 import { FastifyInstance } from "fastify";
-import { prisma } from "@/lib/prisma";
-import { hash } from "bcryptjs";
 
 const api = {
   register: "/api/orgs/register",
+  authenticate: "/api/orgs/authenticate",
+  refresh: "/api/orgs/refresh",
 };
 
 const org = {
@@ -18,6 +18,15 @@ const org = {
 
 export async function registerOrg(app: FastifyInstance) {
   const response = await request(app.server).post(api.register).send(org);
+
+  return response;
+}
+
+export async function authenticateOrg(app: FastifyInstance) {
+  const response = await request(app.server).post(api.authenticate).send({
+    email: org.email,
+    password: org.password,
+  });
 
   return response;
 }
