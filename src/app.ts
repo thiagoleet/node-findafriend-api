@@ -3,7 +3,8 @@ import fastifyJwt from "@fastify/jwt";
 import fastifyCookie from "@fastify/cookie";
 import { ZodError } from "zod";
 import { env } from "@/env";
-import orgsRoutes from "./http/modules/orgs/routes";
+import orgsRoutes from "@/http/modules/orgs/routes";
+import petsRoutes from "@/http/modules/pets/routes";
 
 export const app = fastify();
 
@@ -23,6 +24,7 @@ app.register(fastifyJwt, {
 app.register(fastifyCookie);
 
 app.register(orgsRoutes, { prefix: "api/orgs" });
+app.register(petsRoutes, { prefix: "api/pets" });
 
 // Error handling
 app.setErrorHandler((error, _, reply) => {
