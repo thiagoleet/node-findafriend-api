@@ -22,6 +22,24 @@ model Org {
   password_hash String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  Pet           Pet[]
 
   @@map("orgs")
+}
+
+model Pet {
+  id      String @id @default(uuid())
+  name    String
+  species String
+
+  age       Int
+  weight    Float
+  orgId     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  org       Org      @relation(fields: [orgId], references: [id])
+
+  @@unique([orgId, name])
+  @@index([orgId])
+  @@map("pets")
 }
