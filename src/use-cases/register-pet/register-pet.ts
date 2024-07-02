@@ -1,12 +1,13 @@
+import { RequiredFieldsError } from "@/errors";
 import { PetRepository } from "@/repositories";
 import { Pet } from "@prisma/client";
 
 type RegisterPetUseCaseProps = {
   name: string;
   age: number;
+  species: string;
   weight: number;
-  species: String;
-  org_id: string;
+  orgId: string;
 };
 
 type RegisterPetUseCaseResponse = {
@@ -19,6 +20,16 @@ export class RegisterPetUseCase {
   async execute(
     data: RegisterPetUseCaseProps
   ): Promise<RegisterPetUseCaseResponse> {
-    throw new Error("Not implemented");
+    if (!data.orgId) {
+      throw new RequiredFieldsError();
+    }
+
+    if (!data.name) {
+      throw new RequiredFieldsError();
+    }
+
+    const pet = await this.repository.create(data);
+
+    return { pet };
   }
 }

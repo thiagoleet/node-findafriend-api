@@ -19,7 +19,7 @@ describe("Register Pet UseCase", () => {
       age: 1,
       species: "Dog",
       weight: 1,
-      org_id: "org-id",
+      orgId: "org-id",
     });
 
     expect(pet.id).toEqual(expect.any(String));
@@ -32,9 +32,9 @@ describe("Register Pet UseCase", () => {
         age: 1,
         weight: 1,
         species: "Dog",
-        org_id: "",
+        orgId: "",
       })
-    ).rejects.rejects.toBeInstanceOf(RequiredFieldsError);
+    ).rejects.toBeInstanceOf(RequiredFieldsError);
   });
 
   it("should not be able to register a pet without a name", async () => {
@@ -44,8 +44,8 @@ describe("Register Pet UseCase", () => {
         age: 1,
         weight: 1,
         species: "Dog",
-        org_id: "org-id",
+        orgId: "org-id",
       })
-    ).rejects.rejects.toBeInstanceOf(RequiredFieldsError);
+    ).rejects.toBeInstanceOf(RequiredFieldsError);
   });
 });
