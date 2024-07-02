@@ -1,8 +1,11 @@
 import fastify from "fastify";
 import { ZodError } from "zod";
 import { env } from "@/env";
+import orgsRoutes from "./http/modules/orgs/routes";
 
 export const app = fastify();
+
+app.register(orgsRoutes, { prefix: "api/orgs" });
 
 // Error handling
 app.setErrorHandler((error, _, reply) => {
