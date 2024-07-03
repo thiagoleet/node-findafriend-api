@@ -5,7 +5,7 @@ import { InMemoryOrgRepository } from "@/repositories/in-memory";
 import { compare } from "bcryptjs";
 import { OrgAlreadyExistsError, RequiredFieldsError } from "@/errors";
 
-describe("Register UseCase", () => {
+describe("Register Org UseCase", () => {
   let repository: OrgRepository;
   let sut: RegisterUseCase;
 
